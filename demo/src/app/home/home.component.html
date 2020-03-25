@@ -1,0 +1,13 @@
+<ActionBar>
+    <Label text="Home"></Label>
+</ActionBar>
+
+<GridLayout style="padding: 20em" rows="auto,auto,auto,auto,auto,auto,auto,*," columns="*">
+    <!-- Add your page content here -->
+    <Label class="lbl" row="0" style="text-align: center" text="Current Printer MAC:" ></Label>
+    <Label class="lbl" row="1" style="text-align: center" text="{{btPrinterMac}}" ></Label>
+    <Button class="btn" row="2" col="0" text="Print text sample" (tap)="printText()"></Button>
+    <Button class="btn" row="3" col="0" text="Print product label" (tap)="printProductLabel()"></Button>
+    <Button class="btn" row="4" col="0" text="Print service label" (tap)="printServiceLabel()"></Button>
+    <Label class="lbl" row="7" text="{{result}}" ></Label>
+</GridLayout>
