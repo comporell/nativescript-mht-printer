@@ -177,7 +177,7 @@ export class Mht {
         });
     }
 
-    drawCenterCanvas(canvas:Canvas, paint:Paint, text:string) {
+    private drawCenterCanvas(canvas:Canvas, paint:Paint, text:string) {
         let r:Rect = new Rect();
         canvas.getClipBounds(r);
         let cHeight:number = r.height();
@@ -189,7 +189,7 @@ export class Mht {
         canvas.drawText(text, x, y, paint);
     }
 
-    drawCenterHorizontal(canvas:Canvas, paint:Paint, vertical:number, text:string) {
+    private drawCenterHorizontal(canvas:Canvas, paint:Paint, vertical:number, text:string) {
         let r:Rect = new Rect();
         canvas.getClipBounds(r);
         let cWidth:number = r.width();
@@ -199,7 +199,7 @@ export class Mht {
         canvas.drawText(text, x, vertical, paint);
     }
 
-    drawCenterHorizontalOffset(canvas:Canvas, paint:Paint, vertical:number, text:string,offset:number) {
+    private drawCenterHorizontalOffset(canvas:Canvas, paint:Paint, vertical:number, text:string,offset:number) {
         let r:Rect = new Rect();
         canvas.getClipBounds(r);
         let cWidth:number = r.width();
@@ -209,7 +209,7 @@ export class Mht {
         canvas.drawText(text, x+offset, vertical, paint);
     }
 
-    saveBitmapToSD(bitmap:Bitmap): boolean {
+    private saveBitmapToSD(bitmap:Bitmap): boolean {
         try {
             let sd:File = Environment.getExternalStorageDirectory();
             let dest = new File(sd, "nativescript-mht-printer.png");
@@ -224,7 +224,7 @@ export class Mht {
         return true;
     }
 
-    drawArrow(canvas:Canvas,paint:Paint,x:number,y:number){
+    private drawArrow(canvas:Canvas,paint:Paint,x:number,y:number){
         let mPath:Path = new Path();
         mPath.moveTo(x, y + 20);
         mPath.lineTo(x + 10, y + 20);
