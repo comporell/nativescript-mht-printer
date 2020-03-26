@@ -1,13 +1,13 @@
 {
 	"name": "nativescript-mht-printer",
-	"version": "1.0.3",
+	"version": "1.0.9",
 	"description": "Nativescript MeiHengTong MHT Bluetooth Label Printer Plugin",
 	"main": "mht-printer",
 	"typings": "index.d.ts",
 	"nativescript": {
 		"platforms": {
-			"android": "6.5.0",
-			"ios": "6.5.0"
+			"android": "6.3.1",
+			"ios": "6.3.1"
 		}
 	},
 	"repository": {

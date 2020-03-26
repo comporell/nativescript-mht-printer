@@ -1,7 +1,11 @@
 /* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
 
 android {
-	
+		productFlavors {
+		"nativescript-mht-printer" {
+			dimension "nativescript-mht-printer"
+		}
+	}
 }
 
 dependencies {
