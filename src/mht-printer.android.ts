@@ -80,6 +80,57 @@ export class Mht {
 
     }
 
+    public printClientLabel(port:string,serviceId:string,clientUrl:string, clientName:string, clientPhone:string, clientEmail:string,clientPass:string){
+
+        let productBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
+        let canvas: Canvas = new Canvas(productBitmap);
+        canvas.drawRGB(255,255,255);
+        let tpServiceId = new TextPaint();
+        let tpClient = new TextPaint();
+
+        tpServiceId.setAntiAlias(false);
+        tpServiceId.setTextSize(40);
+        tpServiceId.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        tpServiceId.setColor(Color.BLACK);
+
+        tpClient.setAntiAlias(false);
+        tpClient.setTextSize(20);
+        tpClient.setColor(Color.BLACK);
+
+        this.drawCenterHorizontal(canvas, tpServiceId, 40, serviceId);
+        this.drawCenterHorizontal(canvas,tpClient, 80, clientName);
+        this.drawCenterHorizontal(canvas,tpClient, 110, clientPhone);
+        this.drawCenterHorizontal(canvas,tpClient, 140, clientEmail);
+        this.drawCenterHorizontal(canvas,tpClient, 170, clientPass);
+        canvas.save();
+
+        //this.saveBitmapToSD(productBitmap);
+
+        return new Promise<string>((resolve, reject) => {
+
+            let tscActivity = new TSCActivity();
+
+            tscActivity.openport(port);
+            tscActivity.sendcommand("SIZE 58 mm, 25 mm\r\n");
+            //TscDll.sendcommand("GAP 3 mm, 0 mm\r\n");//Gap media
+            tscActivity.clearbuffer();
+            tscActivity.sendcommand("SPEED 4\r\n");
+            tscActivity.sendcommand("CODEPAGE UTF-8\r\n");
+            tscActivity.sendcommandUTF8("DENSITY 4\r\n");
+            tscActivity.sendcommandUTF8("DIRECTION 1\r\n");
+            tscActivity.sendbitmap(180, 0, productBitmap);
+            tscActivity.qrcode(10, 10, "M", "8", "A", "0", "M1", "S7", clientUrl);
+            tscActivity.printlabel(1, 1);
+            let res = tscActivity.closeport(5000);
+            if(res == "1") {
+                resolve("Printed");
+            } else {
+                reject("Print Error");
+            }
+        });
+
+    }
+
     public printProductLabel(port:string,sku:string,price:string,brand:string,model:string){
 
         let productBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
