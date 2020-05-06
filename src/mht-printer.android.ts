@@ -37,15 +37,6 @@ export class Mht {
         .getSystemService(android.content.Context.BLUETOOTH_SERVICE);
     private adapter: android.bluetooth.BluetoothAdapter = this.bluetoothManager.getAdapter();
 
-    // Getter/Setters
-    private get enabled() {
-        if (this.adapter !== null && this.adapter.isEnabled()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private drawCenterCanvas(canvas:Canvas, paint:Paint, text:string) {
         let r:Rect = new Rect();
         canvas.getClipBounds(r);
@@ -218,10 +209,10 @@ export class Mht {
         });
     }
 
-    public printServiceLabel(port:string,serviceId:string,labelNumber:string,clientName:string){
+    public printServiceLabel(port:string,serviceId:string,labelNumber:string,clientName:string): Promise<boolean>{
 
         if (!port|| !serviceId || !labelNumber || !clientName){
-            return new Promise<string>((resolve, reject) => { reject("Error")});
+            return new Promise<boolean>((resolve) => { resolve(false)});
         }
 
         let serviceBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
@@ -260,7 +251,7 @@ export class Mht {
 
         //this.saveBitmapToSD(serviceBitmap);
 
-        return new Promise<string>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
 
             let tscActivity = new TSCActivity();
 
@@ -277,18 +268,18 @@ export class Mht {
             tscActivity.printlabel(1, 1);
             let res = tscActivity.closeport(5000);
             if(res == "1") {
-                resolve("Printed");
+                resolve(true);
             } else {
-                reject("Print Error");
+                resolve(false);
             }
         });
 
     }
 
-    public printClientLabel(port:string,serviceId:string,clientUrl:string, clientName:string, clientPhone:string, clientEmail:string,clientPass:string){
+    public printClientLabel(port:string,serviceId:string,clientUrl:string, clientName:string, clientPhone:string, clientEmail:string,clientPass:string): Promise<boolean>{
 
         if (!port|| !serviceId || !clientUrl || !clientName || !clientPhone|| !clientEmail || !clientPass){
-            return new Promise<string>((resolve, reject) => { reject("Error")});
+            return new Promise<boolean>((resolve) => { resolve(false)});
         }
 
         let productBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
@@ -315,7 +306,7 @@ export class Mht {
 
         //this.saveBitmapToSD(productBitmap);
 
-        return new Promise<string>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
 
             let tscActivity = new TSCActivity();
 
@@ -332,18 +323,18 @@ export class Mht {
             tscActivity.printlabel(1, 1);
             let res = tscActivity.closeport(5000);
             if(res == "1") {
-                resolve("Printed");
+                resolve(true);
             } else {
-                reject("Print Error");
+                resolve(false);
             }
         });
 
     }
 
-    public printProductLabel(port:string,sku:string,price:string,brand:string,model:string){
+    public printProductLabel(port:string,sku:string,price:string,brand:string,model:string): Promise<boolean>{
 
         if (!port|| !sku || !price || !brand || !model){
-            return new Promise<string>((resolve, reject) => { reject("Error")});
+            return new Promise<boolean>((resolve) => { resolve(false)});
         }
 
         let productBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
@@ -374,7 +365,7 @@ export class Mht {
 
         //this.saveBitmapToSD(productBitmap);
 
-        return new Promise<string>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
 
             let tscActivity = new TSCActivity();
 
@@ -391,18 +382,18 @@ export class Mht {
             tscActivity.printlabel(1, 1);
             let res = tscActivity.closeport(5000);
             if(res == "1") {
-                resolve("Printed");
+                resolve(true);
             } else {
-                reject("Print Error");
+                resolve(false);
             }
         });
 
     }
 
-    public printText(port:string, text: string): Promise<string> {
+    public printText(port:string, text: string): Promise<boolean> {
 
         if (!port || !text){
-            return new Promise<string>((resolve, reject) => { reject("Error")});
+            return new Promise<boolean>((resolve) => { resolve(false)});
         }
 
         let textBitmap:Bitmap = Bitmap.createBitmap(180,180, Bitmap.Config.ARGB_8888);
@@ -422,7 +413,7 @@ export class Mht {
 
         //this.saveBitmapToSD(imageBitmap);
 
-        return new Promise<string>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
 
             let tscActivity = new TSCActivity();
 
@@ -438,9 +429,9 @@ export class Mht {
             tscActivity.printlabel(1, 1);
             let res = tscActivity.closeport(5000);
             if(res == "1") {
-                resolve("Printed");
+                resolve(true);
             } else {
-                reject("Print Error");
+                resolve(false);
             }
         });
     }
