@@ -266,7 +266,7 @@ export class Mht {
             tscActivity.sendbitmap(180, 0, serviceBitmap);
             tscActivity.qrcode(180, 180, "M", "8", "A", "180", "M1", "S7", serviceId);
             tscActivity.printlabel(1, 1);
-            let res = tscActivity.closeport(5000);
+            let res = tscActivity.closeport(1000);
             if(res == "1") {
                 resolve(true);
             } else {
@@ -321,7 +321,7 @@ export class Mht {
             tscActivity.sendbitmap(180, 0, productBitmap);
             tscActivity.qrcode(10, 10, "M", "2", "A", "0", "M1", "S7", clientUrl);
             tscActivity.printlabel(1, 1);
-            let res = tscActivity.closeport(5000);
+            let res = tscActivity.closeport(1000);
             if(res == "1") {
                 resolve(true);
             } else {
@@ -380,7 +380,7 @@ export class Mht {
             tscActivity.sendbitmap(180, 0, productBitmap);
             tscActivity.qrcode(10, 10, "M", "8", "A", "0", "M1", "S7", sku);
             tscActivity.printlabel(1, 1);
-            let res = tscActivity.closeport(5000);
+            let res = tscActivity.closeport(1000);
             if(res == "1") {
                 resolve(true);
             } else {
@@ -427,7 +427,7 @@ export class Mht {
             tscActivity.sendcommand("CODEPAGE UTF-8\r\n");
             tscActivity.sendbitmap(0, 0, textBitmap);
             tscActivity.printlabel(1, 1);
-            let res = tscActivity.closeport(5000);
+            let res = tscActivity.closeport(1000);
             if(res == "1") {
                 resolve(true);
             } else {
